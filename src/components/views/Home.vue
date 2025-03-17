@@ -18,8 +18,13 @@
 </template>
 
 <script setup>
-import { computed } from "vue";
+import { computed, onMounted, ref } from "vue";
 import store from "../../store";
+import { axiosClient } from "../../axiosClient";
+
+onMounted(async () => {
+  const response = await axiosClient.get("list.php?i=list");
+  console.log(response.data);
+});
 const letters = "ABCDEFGHIJKLMNOPQRSTUVWXYZ";
-const meals = computed(() => store.state.meals);
 </script>
