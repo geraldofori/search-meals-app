@@ -14,11 +14,11 @@
       :key="meal.idMeal"
       class="bg-white shadow rounded-xl"
     >
-      <router-link to="/meals/1">
+      <router-link :to="{ name: 'mealDetails', params: { id: meal.idMeal } }">
         <img
           :src="meal?.strMealThumb"
           :alt="meal?.strMeal"
-          class="h-48 w-full object-cover mt-4 rounded-t-xl"
+          class="h-48 w-full object-cover rounded-t-xl"
         />
       </router-link>
 
@@ -28,14 +28,9 @@
           jfl;akjsfdjak;sjdfkal;jsfkd aksdmfka akdjfkaj kajdkfjak jdf aksjd fkaj
           kdjafkj jdka lfjdkf ka kajdkfj k
         </p>
-      </div>
-      <div class="flex items-center justify-between">
-        <a
-          :href="meal?.strYoutube"
-          target="_blank"
-          class="px-3 py-2 rounded border-2 border-red-600 text-white bg-red-500 hover:bg-red-600 hover:text-white transition-colors"
-          >YouTube</a
-        >
+        <div class="flex items-center justify-between">
+          <YoutubeButton :href="meal?.strYoutube">Youtube</YoutubeButton>
+        </div>
       </div>
     </div>
   </div>
@@ -45,13 +40,12 @@
 import { computed, onMounted, ref } from "vue";
 import store from "../../store";
 import { useRoute } from "vue-router";
+import YoutubeButton from "../YoutubeButton.vue";
 const route = useRoute();
 const meals = computed(() => store.state.searchedMeals);
-console.log("meals", meals);
-
 const keyword = ref("");
+
 function searcForMeals() {
-  console.log("keyword.value", keyword.value);
   store.dispatch("searchMeals", keyword.value);
 }
 

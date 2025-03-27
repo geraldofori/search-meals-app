@@ -7,7 +7,7 @@ export default defineConfig({
   plugins: [vue(), tailwindcss()],
   server: {
     hmr: {
-      overlay: false,
+      overlay: true,
     },
   },
 });
